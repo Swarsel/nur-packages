@@ -1,4 +1,4 @@
-{ name, pkgs, ... }:
+{ name, lib, pkgs, ... }:
 pkgs.stdenv.mkDerivation rec {
   pname = "obsidian.plugins.${name}";
   version = "0.3.1";
@@ -28,4 +28,11 @@ pkgs.stdenv.mkDerivation rec {
     cp ./main.js $out/main.js
     cp ./styles.css $out/styles.css
   '';
+
+  meta = with lib; {
+    homepage = "https://github.com/ganesshkumar/obsidian-table-editor";
+    changelog = "https://github.com/ganesshkumar/obsidian-table-editor/releases/tag/${version}";
+    description = "An Obsidian plugin to provide an editor for Markdown tables. It can open CSV data and data from Microsoft Excel, Google Sheets, Apple Numbers and LibreOffice Calc as Markdown tables from Obsidian Markdown editor. ";
+    license = licenses.mit;
+  };
 }

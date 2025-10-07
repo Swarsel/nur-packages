@@ -1,4 +1,4 @@
-{ name, pkgs, ... }:
+{ name, lib, pkgs, ... }:
 
 pkgs.stdenv.mkDerivation rec {
   pname = "obsidian.plugins.${name}";
@@ -28,4 +28,11 @@ pkgs.stdenv.mkDerivation rec {
     cp $manifest $out/manifest.json
     cp $stylesCss $out/styles.css
   '';
+
+  meta = with lib; {
+    homepage = repo;
+    changelog = "${repo}/releases/tag/${version}";
+    description = "An Obsidian plugin to provide an editor for Markdown tables. It can open CSV data and data from Microsoft Excel, Google Sheets, Apple Numbers and LibreOffice Calc as Markdown tables from Obsidian Markdown editor. ";
+    license = licenses.isc;
+  };
 }

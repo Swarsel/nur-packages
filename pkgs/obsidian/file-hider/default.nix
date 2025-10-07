@@ -1,4 +1,4 @@
-{ name, pkgs, ... }:
+{ name, lib, pkgs, ... }:
 
 pkgs.stdenv.mkDerivation rec {
   pname = "obsidian.plugins.${name}";
@@ -22,4 +22,11 @@ pkgs.stdenv.mkDerivation rec {
     cp $mainJs $out/main.js
     cp $manifest $out/manifest.json
   '';
+
+  meta = with lib; {
+    homepage = repo;
+    changelog = "${repo}/releases/tag/${version}";
+    description = "A plugin for https://obsidian.md that allows hiding specific files and folders from the file explorer. ";
+    license = licenses.mit;
+  };
 }

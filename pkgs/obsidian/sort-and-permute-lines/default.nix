@@ -1,4 +1,4 @@
-{ name, pkgs, ... }:
+{ name, lib, pkgs, ... }:
 
 pkgs.stdenv.mkDerivation rec {
   pname = "obsidian.plugins.${name}";
@@ -28,4 +28,11 @@ pkgs.stdenv.mkDerivation rec {
     cp $manifest $out/manifest.json
     cp $stylesCss $out/styles.css
   '';
+
+  meta = with lib; {
+    homepage = repo;
+    changelog = "${repo}/releases/tag/${version}";
+    description = "Sort and Permute lines in whole file or selection. ";
+    license = licenses.unfree;
+  };
 }

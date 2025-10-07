@@ -1,7 +1,8 @@
-{ name, pkgs, ... }:
+{ name, lib, pkgs, ... }:
 pkgs.stdenv.mkDerivation rec {
   pname = "obsidian.plugins.${name}";
   version = "2.0.0-beta.2";
+  repo = "https://github.com/liamcain/obsidian-calendar-plugin";
 
   src = pkgs.fetchFromGitHub {
     owner = "liamcain";
@@ -28,4 +29,11 @@ pkgs.stdenv.mkDerivation rec {
     cp ./main.js $out/main.js
     cp ./styles.css $out/styles.css
   '';
+
+  meta = with lib; {
+    homepage = repo;
+    changelog = "${repo}/releases/tag/${version}";
+    description = "Simple calendar widget for Obsidian. ";
+    license = licenses.mit;
+  };
 }

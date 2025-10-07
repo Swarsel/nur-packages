@@ -86,11 +86,11 @@
 
 
 
-    meta = {
+    meta = with lib; {
       description = "Pokémon RNG Timer";
       homepage = "https://github.com/DasAmpharos/EonTimer";
-      license = lib.licenses.mit;
-      maintainers = with lib.maintainers; [ ];
+      changelog = "https://github.com/DasAmpharos/EonTimer/releases/tag/${version}";
+      license = licenses.mit;
       mainProgram = "eon-timer";
     };
   }
