@@ -10,6 +10,8 @@ let
   cfg = config.swarselservices.pizauth;
 in
 {
+  _class = "nixos";
+
   options.swarselservices.pizauth = {
     enable = lib.mkEnableOption ''
       Pizauth, a commandline OAuth2 authentication daemon

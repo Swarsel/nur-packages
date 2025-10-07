@@ -16,6 +16,8 @@ let
     ;
 in
 {
+  _class = "home-manager";
+
   options.swarselservices.homebox = {
     enable = mkEnableOption "homebox";
     package = mkPackageOption pkgs "homebox" { };
@@ -152,8 +154,4 @@ in
       wantedBy = [ "multi-user.target" ];
     };
   };
-  meta.maintainers = with lib.maintainers; [
-    patrickdag
-    swarsel
-  ];
 }

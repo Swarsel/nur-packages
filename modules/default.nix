@@ -1,5 +1,6 @@
 {
   # Add your NixOS modules here
   #
-  # my-module = ./my-module;
+  homebox = ./nixos/homebox.nix;
+  pizauth = ./home/pizauth.nix;
 }
