@@ -1,6 +1,5 @@
 { name, pkgs, ... }:
 pkgs.stdenv.mkDerivation rec {
-  inherit name;
   pname = "obsidian.plugins.${name}";
   version = "2.0.0-beta.2";
 

@@ -1,7 +1,6 @@
 { name, pkgs, ... }:
 
 pkgs.stdenv.mkDerivation rec {
-  inherit name;
   pname = "obsidian.plugins.${name}";
   version = "0.7.0";
   repo = "https://github.com/Vinzent03/obsidian-sort-and-permute-lines";

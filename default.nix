@@ -7,15 +7,17 @@
 #     nix-build -A mypackage
 
 { pkgs ? import <nixpkgs> { } }:
-
+let
+  nixlib = pkgs.lib;
+  obsidian-pkgs = import ./pkgs/obsidian { inherit nixlib pkgs; };
+  general-pkgs = import ./pkgs/general { inherit nixlib pkgs; };
+in
 {
   # The `lib`, `modules`, and `overlays` names are special
   lib = import ./lib { inherit pkgs; }; # functions
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
-  obdisian-pkgs = import ./pkgs/obsidian;
-  general-pkgs = import ./pkgs/general;
   # some-qt5-package = pkgs.libsForQt5.callPackage ./pkgs/some-qt5-package { };
   # ...
-}
+} // obsidian-pkgs // general-pkgs

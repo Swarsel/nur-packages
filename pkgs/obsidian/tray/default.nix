@@ -1,7 +1,6 @@
 { name, pkgs, ... }:
 
 pkgs.stdenv.mkDerivation rec {
-  inherit name;
   pname = "obsidian.plugins.${name}";
   version = "0.3.5";
   repo = "https://github.com/dragonwocky/obsidian-tray";

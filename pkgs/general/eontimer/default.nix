@@ -1,4 +1,5 @@
-  { lib
+{ name
+  , lib
   , python3
   , fetchFromGitHub
   , makeDesktopItem

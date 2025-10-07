@@ -1,7 +1,6 @@
 { name, pkgs, ... }:
 
 pkgs.stdenv.mkDerivation rec {
-  inherit name;
   pname = "obsidian.plugins.${name}";
   version = "1.30.0";
   repo = "https://github.com/platers/obsidian-linter";
