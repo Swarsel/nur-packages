@@ -3,6 +3,7 @@
     lib = nixlib;
     mkPackages = names: pkgs: builtins.listToAttrs (map
       (name: {
+        # name = "obsidianPackages.${name}";
         inherit name;
         value = pkgs.callPackage ./${name} { inherit lib name; };
       })

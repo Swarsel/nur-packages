@@ -1,38 +1,38 @@
 { name, lib, pkgs, ... }:
+
 pkgs.stdenv.mkDerivation rec {
-  pname = "obsidian.plugins.${name}";
-  version = "0.3.1";
+  pname = name;
+  version = "0.22.1";
+  repo = "https://github.com/tgrosinger/advanced-tables-obsidian";
 
-  src = pkgs.fetchFromGitHub {
-    owner = "ganesshkumar";
-    repo = "obsidian-table-editor";
-    rev = version;
-    hash = "sha256-Sumfrl+d/4/LOcl4TrcKmSiWJcUrHw/f7/GsZEJgxNE=";
+  mainJs = pkgs.fetchurl {
+    url = "${repo}/releases/download/${version}/main.js";
+    sha256 = "sha256-vzlOEFjS9bwr+KzOa9RuyjVbIR+crmLBHO+NZXWYlCA=";
   };
 
-  offlineCache = pkgs.fetchYarnDeps {
-    yarnLock = src + "/yarn.lock";
-    hash = "sha256-ssCrQcdYrqTWSqz5Gek0gO5EfF85uRZhmnrIun7cVbA=";
+  manifest = pkgs.fetchurl {
+    url = "${repo}/releases/download/${version}/manifest.json";
+    sha256 = "sha256-Y/5KqJ8XuEatfzmFISy/K+P1BDmR0SL/RVeJISlfYow=";
   };
 
-  nativeBuildInputs = with pkgs; [
-    nodejs
-    yarnConfigHook
-    yarnBuildHook
-    npmHooks.npmInstallHook
-  ];
+  stylesCss = pkgs.fetchurl {
+    url = "${repo}/releases/download/${version}/manifest.json";
+    sha256 = "sha256-Y/5KqJ8XuEatfzmFISy/K+P1BDmR0SL/RVeJISlfYow=";
+  };
+
+  phases = [ "installPhase" ];
 
   installPhase = ''
     mkdir -p $out
-    cp ./manifest.json $out/manifest.json
-    cp ./main.js $out/main.js
-    cp ./styles.css $out/styles.css
+    cp $mainJs $out/main.js
+    cp $manifest $out/manifest.json
+    cp $stylesCss $out/styles.css
   '';
 
   meta = with lib; {
-    homepage = "https://github.com/ganesshkumar/obsidian-table-editor";
-    changelog = "https://github.com/ganesshkumar/obsidian-table-editor/releases/tag/${version}";
-    description = "An Obsidian plugin to provide an editor for Markdown tables. It can open CSV data and data from Microsoft Excel, Google Sheets, Apple Numbers and LibreOffice Calc as Markdown tables from Obsidian Markdown editor. ";
-    license = licenses.mit;
+    homepage = repo;
+    changelog = "${repo}/releases/tag/${version}";
+    description = "Improved table navigation, formatting, and manipulation in Obsidian.md";
+    license = licenses.gpl3Only;
   };
 }
