@@ -15,31 +15,32 @@ let
 
 in
 {
-  _class = "homeManager";
+  options.swarselservices.autotiling = {
+    enable = lib.mkEnableOption "enable autotiling service";
+    package = lib.mkPackageOption pkgs "autotiling" { };
 
-  options.swarselservices.autotiling =
-    {
-      enable = lib.mkEnableOption "enable autotiling service";
-      package = lib.mkPackageOption pkgs "autotiling" { };
-
-      extraArgs = mkOption {
-        type = with types; listOf str;
-        default = [ ];
-        example = [ "--workspaces 8 9" ];
-        description = ''
-          Extra arguments to pass to autotiling.
-        '';
-      };
-
-      systemdTarget = mkOption {
-        type = types.str;
-        default = "graphical-session.target";
-        description = ''
-          Systemd target to bind to.
-        '';
-      };
-
+    extraArgs = mkOption {
+      type = with types; listOf str;
+      default = [ ];
+      example = [
+        "--workspaces"
+        "8"
+        "9"
+      ];
+      description = ''
+        Extra arguments to pass to autotiling.
+      '';
     };
+
+    systemdTarget = mkOption {
+      type = types.str;
+      default = "graphical-session.target";
+      description = ''
+        Systemd target to bind to.
+      '';
+    };
+
+  };
 
   config = lib.mkIf cfg.enable {
     assertions = [
