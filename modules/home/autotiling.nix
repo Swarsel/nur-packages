@@ -15,6 +15,8 @@ let
 
 in
 {
+  _class = "homeManager";
+
   options.swarselservices.autotiling =
     {
       enable = lib.mkEnableOption "enable autotiling service";
